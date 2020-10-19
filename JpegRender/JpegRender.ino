@@ -367,7 +367,7 @@ ExtendedGFX::renderJpgFromStream(
 
 
 //  SdFat files (SdFile) are not streams.  This adaptor allows a file to be used as a
-//  stream.
+//  stream.  NOT FAST - would need improvement for real world use.
 class SdFileStream : public Stream
 {
 public:
@@ -437,7 +437,6 @@ void setup()
 
 	tft.setTextSize(1);
 
-	//  This may take some timre for large cards.
 	if (!SD.begin(tft.GetSdCardCS()))
 	{
 		tft.println(F("Unable to init SD card!"));
@@ -450,6 +449,7 @@ void loop()
 {
 	SdFile file;
 
+	//  Opens TEST.JPG located at the root of the SD Card.
 	if (!file.open("TEST.JPG"))
 	{
 		tft.println(F("Unable to open 'TEST.JPG'."));
